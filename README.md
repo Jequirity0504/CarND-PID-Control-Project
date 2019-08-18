@@ -3,6 +3,27 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Implementation
+The PID implementation is included in ./src/PID.cpp file.
+* PID::Init is used to initialize the PID controller.
+* PID::UpdateError calculates the errors of Proportional, integral and derivative part.
+* PID::TotallError calculate the total error of PID controller.
+
+## Reflection
+In this project, we use PID controller to complete the lateral controller of our car -- that means, use PID controller to do steering control. The target is to keep the car in the desired trajectory. The deviation between actual trajectory and desired trajectory is given by CTE(cross track error).
+
+P(proportional) controller:
+The proportional controller calculates an output that is proportional to the control deviation(steering error value). It provided enough or fast steering angle to handle the suddenly turns. A high proportional gain results in a large output according to the control deviation. A pure P-controller is unstable usually.
+
+I(Integral) Controller:
+The integral controller accelerates the return of the car towards center and eliminates the residual steady-state error that occurs with a pure proportional controller. However, since the integral term responds to accumulated errors from the past, it can cause the present value to overshoot the desire car position.
+
+D(Derivative) controller:
+The derivative controller respond to changes in the system. The larger the derivative, the faster the control system responds to the output.
+
+## Tunning
+The parameters were tuned manually by trial and error. Fristly, I increased Kp to increas the sensitivity of the controller in order to keep the car in the lane. Then decreased Kd to decrease the oscillations. Then the Ki and  I found the controller is senstive to Ki, so I set a very small value for it.
+
 ## Dependencies
 
 * cmake >= 3.5
